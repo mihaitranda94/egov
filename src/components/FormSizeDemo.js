@@ -38,7 +38,7 @@ const FormSizeDemo = (props) => {
   const [studentTickets, setStudentTickets] = useState(0);
   const [childrenTickets, setChildrenTickets] = useState(0);
   const [age, setAge] = useState(undefined);
-  const [policy, setPolicy] = useState(false);
+  const [price, setPrice] = useState(0);
   const [submit, setSubmit] = useState(undefined);
 
   const container = React.useRef(null);
@@ -236,9 +236,10 @@ const FormSizeDemo = (props) => {
       email: email.target.value,
       age: age,
       ticketType: busSwitch ? "bus" : "metro",
-      numberOfTickets: parseInt(
-        adultTickets + studentTickets + childrenTickets
-      ),
+      adultsTickets: adultTickets,
+      studentsTickets: studentTickets,
+      childrenTickets: childrenTickets,
+      price: price
     };
     const data = [
       { firstname: firstName.target.value.toString() },
@@ -380,7 +381,9 @@ const FormSizeDemo = (props) => {
         <Form.Item label="Number of tickets">
           <Card title="Adults" style={{ width: 250 }}>
             <InputNumber
-              onChange={(value) => setAdultTickets(value)}
+              onChange={(value) => {
+                setPrice(selectValue * adultTickets + 0.2 * selectValue * studentTickets)
+                setAdultTickets(value)}}
               min={0}
               max={20}
               addonAfter="Adults"
@@ -389,7 +392,9 @@ const FormSizeDemo = (props) => {
           </Card>
           <Card title="Students (20% discount)" style={{ width: 250 }}>
             <InputNumber
-              onChange={(value) => setStudentTickets(value)}
+              onChange={(value) => {
+                setPrice(selectValue * adultTickets + 0.2 * selectValue * studentTickets)
+                setStudentTickets(value)}}
               min={0}
               max={20}
               addonBefore="Students"
@@ -398,7 +403,9 @@ const FormSizeDemo = (props) => {
           </Card>
           <Card title="Children (< 12 FREE) " style={{ width: 250 }}>
             <InputNumber
-              onChange={(value) => setChildrenTickets(value)}
+              onChange={(value) => {
+                
+                setChildrenTickets(value)}}
               min={0}
               max={20}
               addonBefore="Children"
@@ -431,7 +438,7 @@ const FormSizeDemo = (props) => {
             title="Price"
             suffix="RON"
             value={
-              selectValue * adultTickets + 0.2 * selectValue * studentTickets
+              price
             }
             style={{
               marginRight: 32,
@@ -443,9 +450,7 @@ const FormSizeDemo = (props) => {
         </Form.Item>
         <Form.Item label="Agree to Privacy Policy" valuePropName="checked">
           <Switch
-            onChange={() => {
-              setPolicy(true);
-            }}
+            
           />
         </Form.Item>
         <Form.Item label="Submit Data">

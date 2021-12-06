@@ -19,10 +19,10 @@ const getForm = () => {
 };
 const createForm = async (body) => {
   return new Promise(function (resolve, reject) {
-    const { firstName, lastName, email, age, ticketType, numberOfTickets } = body;
+    const { firstName, lastName, email, age, ticketType, adultsTickets, studentsTickets, childrenTickets, price } = body;
     pool.query(
-      "INSERT INTO form (firstname, lastname, email, age, tickettype, numberoftickets) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-      [firstName, lastName, email, age, ticketType, numberOfTickets],
+      "INSERT INTO form (firstname, lastname, email, age, tickettype, adultsTickets, studentsTickets, childrenTickets, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+      [firstName, lastName, email, age, ticketType, adultsTickets, studentsTickets, childrenTickets, price],
       (error, results) => {
         if (error) {
           reject(error);

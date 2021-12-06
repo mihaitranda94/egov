@@ -5,5 +5,8 @@ CREATE TABLE form(
 	email	    VARCHAR(50)	NOT NULL,
 	age	        INT	        NOT NULL,
     ticketType  VARCHAR(5)  NOT NULL,
-    numberOfTickets INT     NOT NULL,
+    adultsTickets INT     NOT NULL,
+	studentsTickets INT     NOT NULL,
+	childrenTickets INT     NOT NULL,
+	price			INT		NOT NULL,
 	CONSTRAINT id_pkey PRIMARY KEY (id));
