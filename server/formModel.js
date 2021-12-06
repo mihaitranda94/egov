@@ -9,11 +9,13 @@ const pool = new Pool({
 
 const getForm = () => {
   return new Promise(function (resolve, reject) {
-    pool.query("SELECT * FROM form ", (error, results) => {
+    console.log("fetching all form data")
+    pool.query("SELECT * FROM form", (error, results) => {
       if (error) {
         reject(error);
       }
       resolve(results.rows);
+      console.log(results.rows)
     });
   });
 };

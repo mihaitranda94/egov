@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import { Grid, GridColumn as Column } from "@progress/kendo-react-grid";
 import axios from "axios";
 import exportFromJSON from "export-from-json";
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
@@ -239,7 +238,7 @@ const FormSizeDemo = (props) => {
       adultsTickets: adultTickets,
       studentsTickets: studentTickets,
       childrenTickets: childrenTickets,
-      price: price
+      price: selectValue * adultTickets + 0.2 * selectValue * studentTickets
     };
     const data = [
       { firstname: firstName.target.value.toString() },
@@ -382,7 +381,6 @@ const FormSizeDemo = (props) => {
           <Card title="Adults" style={{ width: 250 }}>
             <InputNumber
               onChange={(value) => {
-                setPrice(selectValue * adultTickets + 0.2 * selectValue * studentTickets)
                 setAdultTickets(value)}}
               min={0}
               max={20}
@@ -393,7 +391,6 @@ const FormSizeDemo = (props) => {
           <Card title="Students (20% discount)" style={{ width: 250 }}>
             <InputNumber
               onChange={(value) => {
-                setPrice(selectValue * adultTickets + 0.2 * selectValue * studentTickets)
                 setStudentTickets(value)}}
               min={0}
               max={20}
@@ -438,7 +435,7 @@ const FormSizeDemo = (props) => {
             title="Price"
             suffix="RON"
             value={
-              price
+              selectValue * adultTickets + 0.2 * selectValue * studentTickets
             }
             style={{
               marginRight: 32,

@@ -10,7 +10,6 @@ import {
   DatePicker,
   InputNumber,
   TreeSelect,
-  Switch,
   Divider,
   Layout,
   Menu,
@@ -25,6 +24,8 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import FormSizeDemo from "./components/FormSizeDemo";
+import Report from "./components/Report";
+import {BrowserRouter as Router, Routes , Route, Link } from "react-router-dom";
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,16 +36,33 @@ function App() {
         <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
           
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["0"]}>
-            <Menu.Item key="1">Home</Menu.Item>
-            <Menu.Item key="2">About</Menu.Item>
-            <Menu.Item key="3">Buy Ticket</Menu.Item>
+            <Menu.Item key="1">
+              <Link to='/'>
+                Home
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to='/report'>
+                Report
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to='/'>
+                Form
+              </Link>
+            </Menu.Item>
           </Menu>
         </Header>
         <Content
           className="site-layout"
           style={{ padding: "0 50px", marginTop: 64 }}
         >
-          <Breadcrumb style={{ margin: "16px 0" }}>
+          
+          <Routes>
+            <Route exact path='/' element={<FormSizeDemo></FormSizeDemo>}></Route>
+            <Route exact path='/report' element={<Report/>}></Route>
+          </Routes>
+          {/* <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>Buy Ticket</Breadcrumb.Item>
             <Breadcrumb.Item>User Form</Breadcrumb.Item>
@@ -56,7 +74,7 @@ function App() {
             <h3>Bucharest Transport User Form</h3>
             <Divider></Divider>
             <FormSizeDemo></FormSizeDemo>
-          </div>
+          </div> */}
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Demo Form © 2021 Created by Mihai Trandafirescu
